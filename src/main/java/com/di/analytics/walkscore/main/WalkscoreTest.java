@@ -1,4 +1,4 @@
-package se.walkercrou.places.main;
+package com.di.analytics.walkscore.main;
 
 /**
  * Created by avenkataraman on 11/2/2015.
