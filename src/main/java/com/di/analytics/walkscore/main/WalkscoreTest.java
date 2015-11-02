@@ -17,8 +17,16 @@ import java.net.URLConnection;
 
 public class WalkscoreTest {
 
+    private static final String API_KEY = "&wsapikey=ffd1c56f9abcf84872116b4cc2dfcf31";
+    private static final String BASE_URL = "http://api.walkscore.com/score?format=xml&address=";
+
+
+    //Constructor - default
+    public WalkscoreTest(){
+    }
+
     public static void getWalkScore(double lat, double lon, String addr)throws Exception{
-        URL url = new URL("http://api.walkscore.com/score?format=xml&address="+addr+"&lat="+lat+"&lon="+lon+"&wsapikey=ffd1c56f9abcf84872116b4cc2dfcf31");
+        URL url = new URL(BASE_URL+addr+"&lat="+lat+"&lon="+lon+API_KEY);
         URLConnection conn = url.openConnection();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
@@ -32,13 +40,13 @@ public class WalkscoreTest {
 
     }
 
-    public static void main(String[] args)throws Exception {
+    //public static void main(String[] args)throws Exception {
 
         // URL url = new URL("http://api.walkscore.com/score?format=xml&address=1119%8th%20Avenue%20Seattle%20WA%2098101&lat=47.6085&lon=-122.3295&wsapikey=ffd1c56f9abcf84872116b4cc2dfcf31");
 
-        getWalkScore(47.6085,-122.3295,"1119%8th%20Avenue%20Seattle%20WA%2098101");
+        //getWalkScore(47.6085,-122.3295,"1119%8th%20Avenue%20Seattle%20WA%2098101");
 
-    }
+    //}
 
 }
 
