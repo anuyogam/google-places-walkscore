@@ -1,6 +1,8 @@
 package com.di.analytics.walkscore.main;
 
 import com.di.analytics.walkscore.main.utilities.GeocodeHelper;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import se.walkercrou.places.GooglePlaces;
 import se.walkercrou.places.Param;
@@ -13,28 +15,29 @@ import java.util.Scanner;
  * Created by jastang on 9/23/2015.
  */
 public class Main {
-    private static final String API_KEY = "AIzaSyBDlQPgnEWUbmvUdvg5sZT2EXeeRg1Er9s";
+    private static final String API_KEY = "AIzaSyCfpRLX1mIkS0DxTSRSU5KnxyTQU86P_ts";
     private static final int MAX_RESULTS = 3;
 
     public static void main(String[] args) {
+        Logger.getLogger("httpclient").setLevel(Level.OFF);
+        Logger.getLogger("org.apache.http.headers").setLevel(Level.OFF);
+
         GooglePlaces client = new GooglePlaces(API_KEY);
         client.setDebugModeEnabled(false);
-
-        GeocodeHelper geocoder = new GeocodeHelper();
 
         Scanner reader = new Scanner(System.in);
         System.out.println("Where do you live? ");
         String address = reader.nextLine();
 
         JSONObject response =
-                geocoder.geocode(null, geocoder.getFormattedAddressForGeocode(address), GeocodeHelper.GEOCODE_METHOD.FORWARD);
-        double lat = geocoder.getLat(response);
-        double lng = geocoder.getLong(response);
+                GeocodeHelper.geocode(null, GeocodeHelper.getFormattedAddressForGeocode(address), GeocodeHelper.GEOCODE_METHOD.FORWARD);
+        double lat = GeocodeHelper.getLat(response);
+        double lng = GeocodeHelper.getLong(response);
         //System.out.println("Geocode result: {" + lat +","+lng+"}");
         try {
             System.out.println("Your WalkScore: ");
             System.out.println(WalkscoreTest.getWalkScore(
-                    WalkscoreTest.getWalkScoreResponse(lat, lng, geocoder.getFormattedAddressForWalkscore(address))
+                    WalkscoreTest.getWalkScoreResponse(lat, lng, GeocodeHelper.getFormattedAddressForWalkscore(address))
             ));
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,8 +49,8 @@ public class Main {
         List<Place> places = client.getNearbyPlaces(lat, lng, radius, Param.name("type").value(placeType.toLowerCase().replaceAll(" ", "_")));
         for(Place p : places){
             System.out.println(p.getName());
-            JSONObject reverseGeocode = geocoder.geocode(p, null, GeocodeHelper.GEOCODE_METHOD.REVERSE);
-            System.out.println("Address: " + geocoder.getAddress(reverseGeocode) + '\n');
+            JSONObject reverseGeocode = GeocodeHelper.geocode(p, null, GeocodeHelper.GEOCODE_METHOD.REVERSE);
+            System.out.println("Address: " + GeocodeHelper.getAddress(reverseGeocode) + '\n');
         }
     }
 }

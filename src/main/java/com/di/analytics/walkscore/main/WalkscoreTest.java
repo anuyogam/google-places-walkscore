@@ -20,7 +20,7 @@ public class WalkscoreTest {
 
 
     //Constructor - default
-    public WalkscoreTest(){
+    private WalkscoreTest(){
     }
 
     public static double getWalkScore(JSONObject response){

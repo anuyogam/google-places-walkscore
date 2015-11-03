@@ -23,7 +23,7 @@ public class GeocodeHelper {
 
     public enum GEOCODE_METHOD {FORWARD, REVERSE};
 
-    public GeocodeHelper(){
+    private GeocodeHelper(){
     }
 
     public static String getFormattedAddressForWalkscore(JSONObject response){
