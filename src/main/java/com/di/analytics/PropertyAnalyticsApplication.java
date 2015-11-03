@@ -23,7 +23,7 @@ public class PropertyAnalyticsApplication extends Application<PropertyAnalyticsC
     @Override
     public void initialize(Bootstrap<PropertyAnalyticsConfiguration> bootstrap) {
         bootstrap.addBundle (new AssetsBundle());
-
+        //bootstrap.addBundle (new AssetsBundle("/assets/js"));
     }
 
     @Override
