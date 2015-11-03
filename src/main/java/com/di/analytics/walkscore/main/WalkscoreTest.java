@@ -4,40 +4,68 @@ package com.di.analytics.walkscore.main;
  * Created by avenkataraman on 11/2/2015.
  */
 
-import org.w3c.dom.Document;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
 public class WalkscoreTest {
 
     private static final String API_KEY = "&wsapikey=ffd1c56f9abcf84872116b4cc2dfcf31";
-    private static final String BASE_URL = "http://api.walkscore.com/score?format=xml&address=";
+    private static final String BASE_URL = "http://api.walkscore.com/score?format=json&address=";
 
 
     //Constructor - default
     public WalkscoreTest(){
     }
 
-    public static void getWalkScore(double lat, double lon, String addr)throws Exception{
+    public static double getWalkScore(JSONObject response){
+        double ret = 0;
+        try{
+            ret = response.getDouble("walkscore");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return ret;
+    }
+
+    public static JSONObject getWalkScoreResponse(double lat, double lon, String addr)throws Exception{
+        JSONObject jsonObject = new JSONObject();
+        StringBuilder stringBuilder = new StringBuilder();
+
         URL url = new URL(BASE_URL+addr+"&lat="+lat+"&lon="+lon+API_KEY);
         URLConnection conn = url.openConnection();
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document doc = builder.parse(conn.getInputStream());
+        InputStream response = conn.getInputStream();
 
-        TransformerFactory transformerFactory = TransformerFactory.newInstance();
-        Transformer xform = transformerFactory.newTransformer();
+        String contentType = conn.getHeaderField("Content-Type");
+        String charset = null;
 
-// that’s the default xform; use a stylesheet to get a real one
-        xform.transform(new DOMSource(doc), new StreamResult(System.out));
+        for (String param : contentType.replace(" ", "").split(";")) {
+            if (param.startsWith("charset=")) {
+                charset = param.split("=", 2)[1];
+                break;
+            }
+        }
 
+        if (charset != null) {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(response, charset))) {
+                for (String line; (line = reader.readLine()) != null; ) {
+                    stringBuilder.append(line);
+                }
+            }
+        } else {
+            // It's likely binary content, use InputStream/OutputStream.
+        }
+        try {
+            jsonObject = new JSONObject(stringBuilder.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
     //public static void main(String[] args)throws Exception {
