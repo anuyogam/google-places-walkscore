@@ -14,16 +14,21 @@ public class PropertyAnalyticsApplication extends Application<PropertyAnalyticsC
         new PropertyAnalyticsApplication().run(args);
     }
 
+
     @Override
-    public void initialize(final Bootstrap<PropertyAnalyticsConfiguration> bootstrap) {
-        AssetsBundle bundle = new AssetsBundle("/html");
-        bootstrap.addBundle (bundle);
+    public String getName() {
+        return "property-analytics";
+    }
+
+    @Override
+    public void initialize(Bootstrap<PropertyAnalyticsConfiguration> bootstrap) {
+        bootstrap.addBundle (new AssetsBundle());
 
     }
 
     @Override
     public void run(final PropertyAnalyticsConfiguration propertyAnalyticsConfiguration, final Environment environment) throws Exception {
-        environment.jersey().register(new PropertyAnalyticsResource());
+        //environment.jersey().register(new PropertyAnalyticsResource());
         //environment.jersey().setUrlPattern("/api/*");
     }
 }
