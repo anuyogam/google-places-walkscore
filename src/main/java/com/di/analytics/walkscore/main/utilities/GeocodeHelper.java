@@ -28,10 +28,15 @@ public class GeocodeHelper {
 
     public static String getFormattedAddressForWalkscore(JSONObject response){
         String ret = null;
+        ret = getAddress(response).replaceAll(", ", "%");
+        return ret;
+    }
+
+    public static String getAddress(JSONObject response){
+        String ret = null;
         try{
             JSONObject embedded = response.getJSONArray("results").getJSONObject(0);
             ret = embedded.getString("formatted_address");
-            ret = ret.replaceAll(", ", "%");
         }catch(Exception e){
             e.printStackTrace();
         }
