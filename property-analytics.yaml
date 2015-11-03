@@ -1,2 +1,7 @@
-http:
+server:
+  type: simple
+  applicationContextPath: /application
   rootPath: /api/*
+  connector:
+    type: http
+    port: 8080

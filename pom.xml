@@ -67,7 +67,7 @@
         <shade-plugin.version>2.3</shade-plugin.version>
         <nexus-plugin.version>1.6.5</nexus-plugin.version>
         <ghp-plugin.version>1.0.0</ghp-plugin.version>
-        <dropwizard.version>0.9.0</dropwizard.version>
+        <dropwizard.version>0.8.0</dropwizard.version>
     </properties>
 
     <dependencies>
@@ -99,6 +99,16 @@
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-core</artifactId>
+            <version>${dropwizard.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.dropwizard</groupId>
+            <artifactId>dropwizard-assets</artifactId>
+            <version>${dropwizard.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.dropwizard</groupId>
+            <artifactId>dropwizard-servlets</artifactId>
             <version>${dropwizard.version}</version>
         </dependency>
     </dependencies>
