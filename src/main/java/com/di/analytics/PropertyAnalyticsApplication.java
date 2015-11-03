@@ -28,7 +28,7 @@ public class PropertyAnalyticsApplication extends Application<PropertyAnalyticsC
 
     @Override
     public void run(final PropertyAnalyticsConfiguration propertyAnalyticsConfiguration, final Environment environment) throws Exception {
-        //environment.jersey().register(new PropertyAnalyticsResource());
+        environment.jersey().register(new PropertyAnalyticsResource());
         //environment.jersey().setUrlPattern("/api/*");
     }
 }
