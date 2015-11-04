@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-ng-app="">
+<html lang="en" data-ng-app="dashboardApp">
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
@@ -9,7 +9,12 @@
 <body>
 <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDccHlC8r2TtQEo61-5TG6OoWcZyMCbyxg&signed_in=true&libraries=places&callback=initAutocomplete"
         async defer></script>-->
-<!--<script type="text/javascript" src="js/pa.js"/>-->
+<!--<script type="text/javascript" src="js/pa.js"></script>-->
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/ngAutocomplete.js"></script>
+<script type="text/javascript" src="js/jsDashboard.js"></script>
 
 <div class="container">
     <h1>Property Analytics Dashboard</h1>
@@ -17,15 +22,15 @@
     <form>
         <div class="form-group">
             <label>Address: </label>
-            <input id="autocomplete" onFocus="geolocate()" type="text" data-ng-model="address" class="form-control" placeholder="Where do you live?"/>
+            <input id="autocomplete" type="text" ng-autocomplete ng-model="autocomplete" details="placesData" class="form-control" placeholder="Where do you live?"/>
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
-    <pre>{{address | json}}</pre>
+    <br/>
+    <pre>{{placesData | json}}</pre>
 </div>
 
 
 
-<script type="text/javascript" src="js/angular.min.js"></script>
 </body>
 </html>

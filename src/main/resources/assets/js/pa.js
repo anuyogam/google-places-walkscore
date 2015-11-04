@@ -1,3 +1,21 @@
+/*
+var dashboard = angular.module('dashboard', []);
+
+dashboard.controller('dashboardController', function ($scope) {
+    $scope.inputAddress = {'address': '', 'lat': '', 'long' : ''};
+    //var inputFrom = document.getElementById('from');
+    //var autocompleteFrom = new google.maps.places.Autocomplete(inputFrom, options);
+    google.maps.event.addListener(autocompleteFrom, 'place_changed', function() {
+        var place = autocompleteFrom.getPlace();
+        $scope.user.fromLat = place.geometry.location.lat();
+        $scope.user.fromLng = place.geometry.location.lng();
+        $scope.user.from = place.formatted_address;
+        $scope.$apply();
+    });
+});
+
+*/
+
 // This example displays an address form, using the autocomplete feature
 // of the Google Places API to help users fill in the information.
 
