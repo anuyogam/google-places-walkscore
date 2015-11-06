@@ -1,3 +1,8 @@
+//var dashboardApp = angular.module('dashboardApp',[]);
+
+
+
+
 /*
 var dashboard = angular.module('dashboard', []);
 
@@ -19,6 +24,7 @@ dashboard.controller('dashboardController', function ($scope) {
 // This example displays an address form, using the autocomplete feature
 // of the Google Places API to help users fill in the information.
 
+/*
 var placeSearch, autocomplete;
 var componentForm = {
     street_number: 'short_name',
@@ -33,7 +39,7 @@ function initAutocomplete() {
     // Create the autocomplete object, restricting the search to geographical
     // location types.
     autocomplete = new google.maps.places.Autocomplete(
-        /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+        /!** @type {!HTMLInputElement} *!/(document.getElementById('autocomplete')),
         {types: ['geocode']});
 
     // When the user selects an address from the dropdown, populate the address
@@ -78,3 +84,4 @@ function geolocate() {
         });
     }
 }
+*/
