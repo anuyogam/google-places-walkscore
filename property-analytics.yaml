@@ -1,0 +1,10 @@
+server:
+#  type: simple
+#  applicationContextPath: /application
+#  rootPath: /api/*
+  applicationConnectors:
+    - type: http
+      port: 8080
+  adminConnectors:
+    - type: http
+      port: 8082
